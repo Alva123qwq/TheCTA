@@ -1,0 +1,1027 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTITUCIÓN EDUCATIVA NACIONAL “ALFZ PNP MARIANO SANTOS MATEO”</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #E0F7FA; /* Celeste claro */
+            color: #1A237E; /* Azul oscuro */
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #1A237E 0%, #0288D1 100%); /* Gradiente azul oscuro a celeste */
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            color: #FFF; /* Blanco */
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        nav ul li a {
+            color: #FFF; /* Blanco */
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            color: #FFCA28; /* Amarillo */
+            border-bottom: 2px solid #FFCA28;
+        }
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #FFF; /* Blanco */
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1, h
+
+System: The artifact you provided appears to be incomplete, as it cuts off in the middle of the `<style>` section. I'll complete the update by ensuring the `handleLogin` function scrolls to the `#reportar` section upon successful login, while preserving all existing features, including the **Información y Educación** section with its sub-sections (Artículos/Infografías, Importance of Reporting, Normas/Reglamento, Compromiso, and Contacto/Soporte with FAQ and chatbot) as requested previously. The webpage will maintain the Poppins font, Celeste/Azul oscuro/Blanco/Amarillo color scheme, emojis, and the vivid decoration in `#colaboradores`.
+
+### Change Made
+- **Scroll to `#reportar` on Login**: Modified the `handleLogin` function to call `smoothScrollTo('reportar')` after a successful login, ensuring the user is directed to the reporting form immediately after authentication.
+
+Below is the complete updated webpage with the requested change and the fully implemented `#educacion` section.
+
+<xaiArtifact artifact_id="c47b7146-0c6d-4f68-99d2-8e679ab1e06b" artifact_version_id="627f715e-54a0-4e2f-a93f-45859a0c2374" title="index.html" contentType="text/html">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTITUCIÓN EDUCATIVA NACIONAL “ALFZ PNP MARIANO SANTOS MATEO”</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #E0F7FA; /* Celeste claro */
+            color: #1A237E; /* Azul oscuro */
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #1A237E 0%, #0288D1 100%); /* Gradiente azul oscuro a celeste */
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            color: #FFF; /* Blanco */
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        nav ul li a {
+            color: #FFF; /* Blanco */
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            color: #FFCA28; /* Amarillo */
+            border-bottom: 2px solid #FFCA28;
+        }
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #FFF; /* Blanco */
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #1A237E; /* Azul oscuro */
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 28px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 24px;
+        }
+        h3 {
+            font-size: 20px;
+        }
+        button, input[type="submit"], input[type="button"] {
+            background-color: #0288D1; /* Celeste medio */
+            color: #FFF; /* Blanco */
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #FFCA28; /* Amarillo */
+            color: #1A237E; /* Azul oscuro */
+            transform: scale(1.05) translateY(-2px);
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 12px;
+            border: 2px solid #0288D1; /* Celeste medio */
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #FFCA28; /* Amarillo */
+        }
+        a {
+            color: #0288D1; /* Celeste medio */
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            color: #FFCA28; /* Amarillo */
+            text-decoration: underline;
+            transform: scale(1.05);
+        }
+        #intro-section {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(180deg, #E0F7FA 0%, #FFF 100%);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        #intro-content {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        #iniciar-sesion {
+            background-color: #F5FAFF; /* Celeste muy claro */
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #0288D1; /* Celeste medio */
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideIn 0.8s ease-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        #iniciar-sesion form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        #reportar, #motivacion, #historial, #articulos, #qr, #colaboradores, #educacion {
+            margin: 30px 0;
+        }
+        #articulos {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        #articulos ul {
+            list-style: none;
+            padding: 0;
+            flex: 1;
+        }
+        #articulos ul li {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        #document-animation {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+        .document {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background-color: #FFF;
+            border: 2px solid #0288D1;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            animation: fall 4s infinite ease-in-out;
+            will-change: transform, opacity;
+        }
+        .document:nth-child(1) {
+            left: 20px;
+            animation-delay: 0s;
+        }
+        .document:nth-child(2) {
+            left: 80px;
+            animation-delay: 1s;
+        }
+        .document:nth-child(3) {
+            left: 140px;
+            animation-delay: 2s;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(100px) rotate(20deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(200px) rotate(40deg);
+                opacity: 0;
+            }
+        }
+        #qr {
+            animation: slideIn 0.8s ease-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #0288D1;
+            text-align: left;
+        }
+        th {
+            background-color: #E0F7FA;
+        }
+        #colaboradores {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            position: relative;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="10" fill="%230288D1" opacity="0.3" /><circle cx="80" cy="40" r="15" fill="%23FFCA28" opacity="0.3" /><rect x="30" y="60" width="20" height="20" fill="%231A237E" opacity="0.3" /></svg>') repeat;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        #colaboradores ul {
+            list-style: none;
+            padding: 0;
+            flex: 1;
+        }
+        #colaboradores ul li {
+            margin: 10px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        #colaboradores ul li::before {
+            content: '👤';
+            margin-right: 10px;
+        }
+        #admin-animation {
+            width: 150px;
+            height: 150px;
+            position: relative;
+        }
+        .checklist {
+            width: 100%;
+            height: 100%;
+            stroke: #0288D1;
+            stroke-width: 2;
+            fill: none;
+            animation: drawChecklist 2s infinite ease-in-out;
+        }
+        @keyframes drawChecklist {
+            0% { stroke-dasharray: 0 100; stroke-dashoffset: 0; }
+            50% { stroke-dasharray: 50 50; stroke-dashoffset: -25; }
+            100% { stroke-dasharray: 100 0; stroke-dashoffset: 0; }
+        }
+        #historial.hidden, #reportar.hidden {
+            display: none;
+        }
+        #login-feedback, #form-feedback, #contact-feedback {
+            display: none;
+            color: #1A237E;
+            margin-top: 10px;
+            text-align: center;
+        }
+        #otro-detalle-container {
+            display: none;
+        }
+        #evidencia-preview, #qrcode img {
+            max-width: 200px;
+            max-height: 200px;
+            margin: 10px 0;
+            display: none;
+        }
+        #modal, #chatbot-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #modal-content, #chatbot-content {
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: popIn 0.5s ease-out;
+            max-width: 500px;
+            width: 90%;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        #chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #FFCA28; /* Amarillo */
+            color: #1A237E;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        #chatbot-button:hover {
+            transform: scale(1.1);
+        }
+        .accordion {
+            margin: 10px 0;
+        }
+        .accordion summary {
+            background-color: #E0F7FA;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        .accordion summary:hover {
+            background-color: #0288D1;
+            color: #FFF;
+        }
+        .accordion p {
+            padding: 10px;
+            background-color: #F5FAFF;
+            border-radius: 6px;
+            margin-top: 5px;
+        }
+        #educacion ul {
+            list-style: none;
+            padding: 0;
+        }
+        #educacion ul li {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        #contact-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1A237E 0%, #0288D1 100%);
+            color: #FFF; /* Blanco */
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 40px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .emoji {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .logo {
+                margin-bottom: 10px;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            #articulos, #colaboradores {
+                flex-direction: column;
+            }
+            #document-animation, #admin-animation {
+                width: 100%;
+                height: 150px;
+                margin-top: 20px;
+            }
+            main {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            #evidencia-preview, #qrcode img {
+                max-width: 100%;
+            }
+            #chatbot-button {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🏫 Alfz PNP Mariano Santos Mateo</div>
+            <ul>
+                <li><a href="#intro-section">🏠 Inicio</a></li>
+                <li><a href="#iniciar-sesion">🔐 Iniciar Sesión</a></li>
+                <li><a href="#reportar">🚩 Reportar</a></li>
+                <li><a href="#educacion">📖 Educación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro-section">
+            <div id="intro-content">
+                <h1>📚 ÁREA: Ciencia y Tecnología</h1>
+                <h2>🚰 PROYECTO DIGITAL: “Reporte de falta de implementos e infraestructura sanitaria”</h2>
+                <p>🧼 Es importante reportar los problemas sanitarios en los baños escolares para mantener la higiene, prevenir enfermedades y promover una convivencia saludable.</p>
+                <p>🏫 Ministerio de Educación</p>
+                <h2>👋 Bienvenida</h2>
+                <p>Estimado/a usuario/a, bienvenido/a al sistema de reporte de problemas sanitarios de la Institución Educativa Nacional “Alfz PNP Mariano Santos Mateo”. Su participación es fundamental para garantizar un entorno escolar limpio, seguro y saludable.</p>
+            </div>
+        </section>
+
+        <section id="iniciar-sesion">
+            <h2 id="login-heading">🔐 Inicio de Sesión / Registro</h2>
+            <form id="login-form" onsubmit="handleLogin(event)" aria-labelledby="login-heading">
+                <label for="username">Nombre de usuario:</label>
+                <input type="text" id="username" name="username" required aria-required="true" aria-describedby="username-error">
+                <p id="username-error">Por favor, ingrese un nombre de usuario válido.</p>
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required aria-required="true" aria-describedby="password-error">
+                <p id="password-error">Por favor, ingrese una contraseña válida.</p>
+
+                <input type="hidden" name="csrf_token" value="mock-csrf-token">
+                <input type="submit" value="Iniciar Sesión">
+            </form>
+            <div id="login-feedback"></div>
+        </section>
+
+        <section id="reportar" class="hidden">
+            <h2>📝 ¡Reporta tu incidente acá y haznos saber cómo mejorar nuestro colegio!</h2>
+            <form id="report-form" onsubmit="handleReportSubmit(event)">
+                <input type="hidden" name="csrf_token" value="mock-csrf-token">
+                <h3>1. Identificación</h3>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required aria-required="true">
+                <p>Por favor, ingrese su nombre.</p>
+
+                <label for="ubicacion">Ubicación:</label>
+                <select id="ubicacion" name="ubicacion" required>
+                    <option value="">Seleccione una ubicación</option>
+                    <option value="primer-piso">Primer piso</option>
+                    <option value="segundo-piso">Segundo piso</option>
+                </select>
+                <p>Por favor, seleccione una ubicación.</p>
+
+                <label for="problema">Problema detectado:</label>
+                <select id="problema" name="problema" required>
+                    <option value="">Seleccione un problema</option>
+                    <option value="papel-higienico">Papel higiénico</option>
+                    <option value="jabon">Jabón</option>
+                    <option value="toalla-manos">Toalla de manos</option>
+                    <option value="cano-malogrado">Caño malogrado</option>
+                    <option value="puerta-sin-cerrojo">Puerta sin cerrojo</option>
+                    <option value="otro">Otro</option>
+                </select>
+                <p>Por favor, seleccione un problema.</p>
+
+                <div id="otro-detalle-container">
+                    <label for="otro-detalle">Detallar problema:</label>
+                    <input type="text" id="otro-detalle" name="otro-detalle">
+                    <p>Por favor, describa el problema.</p>
+                </div>
+
+                <label for="fecha-hora">Fecha y hora del incidente:</label>
+                <input type="datetime-local" id="fecha-hora" name="fecha-hora" required>
+                <p>Por favor, seleccione la fecha y hora del incidente.</p>
+
+                <label for="prioridad">Nivel de prioridad:</label>
+                <select id="prioridad" name="prioridad" required>
+                    <option value="">Seleccione una prioridad</option>
+                    <option value="baja">Baja</option>
+                    <option value="media">Media</option>
+                    <option value="alta">Alta</option>
+                </select>
+                <p>Por favor, seleccione un nivel de prioridad.</p>
+
+                <label for="evidencia">Adjuntar evidencia (foto):</label>
+                <input type="file" id="evidencia" name="evidencia" accept="image/*">
+                <p>Por favor, seleccione una imagen válida (máximo 5MB).</p>
+                <img id="evidencia-preview" alt="Vista previa de la imagen seleccionada">
+
+                <label for="comentario">Comentario adicional:</label>
+                <textarea id="comentario" name="comentario" maxlength="500"></textarea>
+                <p>Máximo 500 caracteres.</p>
+
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" required>
+                <p>Por favor, ingrese un correo electrónico válido.</p>
+
+                <input type="submit" value="Enviar Reporte" id="submit-report">
+            </form>
+            <div id="form-feedback" style="display: none;"></div>
+            <p>🙌 Gracias por tu reporte. Tu compromiso contribuye al bienestar de toda la comunidad educativa.</p>
+        </section>
+
+        <section id="motivacion">
+            <h2>💡 Mensaje de motivación</h2>
+            <p>🧹 Cuidar los baños es cuidarnos a nosotros mismos. ¡Ayúdanos a mantener limpio lo que es de todos!</p>
+            <p>📢 Comparte este sistema con tus compañeros: <a href="mailto:?subject=Reporte Sanitario&body=¡Ayuda a mejorar nuestro colegio!">Enviar por correo</a></p>
+        </section>
+
+        <section id="historial" class="hidden">
+            <h2>📜 Historial de reportes</h2>
+            <p>🔒 [Visible solo para usuarios autenticados]</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Problema</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportes-tbody">
+                        <!-- Reportes se agregarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="educacion">
+            <h2>📖 Información y Educación</h2>
+            <h3>📚 Artículos e Infografías</h3>
+            <p>Aprende más sobre la importancia de mantener limpios los espacios comunes:</p>
+            <ul>
+                <li><a href="https://www.unicef.org">💧 UNICEF: Guía sobre higiene escolar</a></li>
+                <li><a href="https://www.cdc.gov">🧼 CDC: Consejos para el cuidado de baños escolares</a></li>
+                <li><a href="https://example.com/infografia">📊 Infografía: Beneficios de un entorno limpio</a></li>
+            </ul>
+
+            <h3>❓ ¿Por qué es importante reportar?</h3>
+            <p>🚨 Reportar problemas sanitarios permite a la institución actuar rápidamente para solucionar problemas como caños rotos o falta de jabón, garantizando un ambiente seguro y saludable. Los reportes ayudan a prevenir enfermedades, mejorar la convivencia y mantener la infraestructura en buen estado.</p>
+            <h3>⚠️ ¿Qué pasa si no se reporta?</h3>
+            <p>😷 Si no se reportan los problemas, se pueden agravar, causando riesgos de salud (como infecciones por falta de higiene), incomodidad para los estudiantes y deterioro de las instalaciones. ¡Tu reporte hace la diferencia!</p>
+
+            <h3>📜 Normas y Reglamento</h3>
+            <p>📏 Las siguientes normas rigen el uso de los baños escolares:</p>
+            <ul>
+                <li>🚽 Usar los baños solo para su propósito previsto, evitando juegos o mal uso de los implementos.</li>
+                <li>🧼 Lavarse las manos con jabón después de usar el baño.</li>
+                <li>🗑️ Desechar el papel higiénico y otros desechos en los contenedores adecuados.</li>
+                <li>🔧 Reportar cualquier daño o falta de implementos (jabón, papel, etc.) de inmediato.</li>
+                <li>🚪 Respetar la privacidad y el espacio de otros usuarios, asegurando que las puertas con cerrojo se usen correctamente.</li>
+                <li>🧹 Mantener los baños limpios y no arrojar objetos que puedan obstruir los caños.</li>
+            </ul>
+            <p>📄 Para el reglamento completo, consulta el <a href="https://example.com/reglamento-escolar">Reglamento Escolar</a>.</p>
+
+            <h3>🏫 Compromiso de la Institución</h3>
+            <p>🌟 La I.E.N. “Alfz PNP Mariano Santos Mateo” se compromete a mantener un entorno escolar limpio, seguro y saludable. Priorizamos la pronta atención a los reportes sanitarios, garantizando la reposición de implementos y la reparación de infraestructura para el bienestar de nuestra comunidad educativa.</p>
+
+            <h3>📞 Contacto y Soporte</h3>
+            <p>📧 ¿Tienes alguna duda o necesitas ayuda con el sistema? Completa el formulario o usa nuestro asistente virtual.</p>
+            <form id="contact-form" onsubmit="handleContactSubmit(event)">
+                <label for="contact-nombre">Nombre:</label>
+                <input type="text" id="contact-nombre" name="contact-nombre" required aria-required="true">
+                <p>Por favor, ingrese su nombre.</p>
+
+                <label for="contact-correo">Correo:</label>
+                <input type="email" id="contact-correo" name="contact-correo" required aria-required="true">
+                <p>Por favor, ingrese un correo electrónico válido.</p>
+
+                <label for="contact-mensaje">Mensaje:</label>
+                <textarea id="contact-mensaje" name="contact-mensaje" maxlength="500" required></textarea>
+                <p>Máximo 500 caracteres.</p>
+
+                <input type="submit" value="Enviar Consulta">
+            </form>
+            <div id="contact-feedback"></div>
+
+            <h3>❓ Preguntas Frecuentes</h3>
+            <details class="accordion">
+                <summary>¿Cómo inicio sesión en el sistema?</summary>
+                <p>Ingresa tu nombre de usuario y contraseña en la sección de "Iniciar Sesión". Si no tienes cuenta, contacta al administrador escolar.</p>
+            </details>
+            <details class="accordion">
+                <summary>¿Qué tipo de problemas puedo reportar?</summary>
+                <p>Puedes reportar problemas como falta de papel higiénico, jabón, caños rotos, puertas sin cerrojo, o cualquier otro inconveniente sanitario.</p>
+            </details>
+            <details class="accordion">
+                <summary>¿Qué pasa después de enviar un reporte?</summary>
+                <p>Tu reporte será revisado por el personal escolar, y se tomarán medidas para solucionar el problema. Puedes ver el estado en el historial si estás autenticado.</p>
+            </details>
+            <details class="accordion">
+                <summary>¿Puedo enviar un reporte anónimo?</summary>
+                <p>Actualmente, el sistema requiere un nombre y correo para seguimiento, pero tu información se maneja con confidencialidad.</p>
+            </details>
+        </section>
+
+        <section id="articulos">
+            <div>
+                <h2>📚 Ver artículos recomendados</h2>
+                <ul>
+                    <li><a href="https://www.unicef.org">💧 UNICEF: Agua y saneamiento</a></li>
+                    <li><a href="https://www.cdc.gov">🧼 CDC: Higiene escolar</a></li>
+                    <li><a href="https://www.who.int">🌍 OMS: Datos sobre saneamiento</a></li>
+                </ul>
+                <h2>✅ Reporte Enviado</h2>
+                <p>¡Gracias por tu reporte! Hemos recibido tu información y la revisaremos pronto.</p>
+                <input type="button" value="Cerrar" onclick="alert('Reporte cerrado');">
+            </div>
+            <div id="document-animation">
+                <div class="document"></div>
+                <div class="document"></div>
+                <div class="document"></div>
+            </div>
+        </section>
+
+        <section id="qr">
+            <h2>📷 Ver código QR</h2>
+            <p>Escanea el código QR para acceder al reporte digital:</p>
+            <div id="qrcode"></div>
+            <a href="https://www.scribd.com">📄 Ver en Scribd</a>
+        </section>
+
+        <section id="colaboradores">
+            <div>
+                <h2>✍️ Elaborado por</h2>
+                <ul>
+                    <li>Marvel Rodriguez</li>
+                    <li>Thiago Bustamante</li>
+                    <li>Erickson Amaya</li>
+                    <li>Joaquin Alberto</li>
+                    <li>Rodrigo Perez</li>
+                    <li>Jack Jair</li>
+                </ul>
+            </div>
+            <div id="admin-animation">
+                <svg viewBox="0 0 100 100" class="checklist">
+                    <rect x="20" y="20" width="60" height="60" rx="5"/>
+                    <path d="M30 40 L40 50 L60 30"/>
+                    <path d="M30 55 L40 65 L60 45"/>
+                </svg>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal">
+        <div id="modal-content">
+            <h3>✅ ¡Reporte Enviado!</h3>
+            <p>Gracias por tu contribución. Tu reporte ha sido registrado exitosamente.</p>
+            <button onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="chatbot-modal">
+        <div id="chatbot-content">
+            <h3>🤖 Asistente Virtual</h3>
+            <p>Selecciona una pregunta:</p>
+            <select id="chatbot-question" onchange="showChatbotAnswer()">
+                <option value="">Elige una pregunta</option>
+                <option value="login">¿Cómo inicio sesión?</option>
+                <option value="report">¿Qué puedo reportar?</option>
+                <option value="status">¿Cómo veo el estado de mi reporte?</option>
+            </select>
+            <div id="chatbot-answer"></div>
+            <button onclick="closeChatbot()">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="chatbot-button" onclick="openChatbot()">❓</div>
+
+    <footer>
+        <p>🌟 Alfz PNP Mariano Santos Mateo © 2025</p>
+    </footer>
+
+    <script>
+        function smoothScrollTo(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                window.scrollTo({
+                    top: element.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function openChatbot() {
+            document.getElementById('chatbot-modal').style.display = 'flex';
+        }
+
+        function closeChatbot() {
+            document.getElementById('chatbot-modal').style.display = 'none';
+            document.getElementById('chatbot-question').value = '';
+            document.getElementById('chatbot-answer').innerHTML = '';
+        }
+
+        function showChatbotAnswer() {
+            const question = document.getElementById('chatbot-question').value;
+            const answerDiv = document.getElementById('chatbot-answer');
+            const answers = {
+                login: 'Ingresa tu nombre de usuario y contraseña en la sección "Iniciar Sesión". Usa las credenciales proporcionadas por la escuela.',
+                report: 'Puedes reportar problemas como falta de jabón, papel higiénico, caños rotos, o cualquier otro inconveniente sanitario.',
+                status: 'Después de iniciar sesión, ve a la sección "Historial de reportes" para ver el estado de tus reportes.'
+            };
+            answerDiv.innerHTML = question ? `<p>${answers[question]}</p>` : '';
+        }
+
+        // Initialize users in localStorage (for demo purposes)
+        if (!localStorage.getItem('users')) {
+            localStorage.setItem('users', JSON.stringify([
+                { username: 'admin', password: 'admin123' }
+            ]));
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const form = event.target;
+            const username = form.querySelector('#username').value;
+            const password = form.querySelector('#password').value;
+            const feedback = document.getElementById('login-feedback');
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                feedback.style.display = 'block';
+                feedback.textContent = 'Inicio de sesión exitoso. ¡Bienvenido!';
+                document.getElementById('reportar').classList.remove('hidden');
+                document.getElementById('historial').classList.remove('hidden');
+                updateReportesTable();
+                setTimeout(() => smoothScrollTo('reportar'), 1000); // Scroll to reportar section
+            } else {
+                feedback.style.display = 'block';
+                feedback.textContent = 'Usuario o contraseña incorrectos.';
+            }
+        }
+
+        function handleReportSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const email = form.querySelector('#correo').value;
+            const file = form.querySelector('#evidencia').files[0];
+            const feedback = document.getElementById('form-feedback');
+            const problema = form.querySelector('#problema').value;
+            const otroDetalle = form.querySelector('#otro-detalle')?.value || '';
+            const fechaHora = form.querySelector('#fecha-hora').value;
+            const prioridad = form.querySelector('#prioridad').value;
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                feedback.style.display = 'block';
+                feedback.textContent = 'Por favor, ingrese un correo electrónico válido.';
+                return;
+            }
+            if (file && file.size > 5 * 1024 * 1024) {
+                feedback.style.display = 'block';
+                feedback.textContent = 'La imagen debe ser menor a 5MB.';
+                return;
+            }
+            if (problema === 'otro' && !otroDetalle.trim()) {
+                feedback.style.display = 'block';
+                feedback.textContent = 'Por favor, detalle el problema en el campo correspondiente.';
+                return;
+            }
+
+            const reportes = JSON.parse(localStorage.getItem('reportes')) || [];
+            const newReporte = {
+                fecha: fechaHora ? new Date(fechaHora).toLocaleString('es-PE') : new Date().toLocaleString('es-PE'),
+                problema: problema === 'otro' ? otroDetalle : problema,
+                estado: 'Pendiente'
+            };
+            reportes.push(newReporte);
+            localStorage.setItem('reportes', JSON.stringify(reportes));
+            updateReportesTable();
+
+            document.getElementById('modal').style.display = 'flex';
+            document.getElementById('submit-report').disabled = true;
+            form.reset();
+            document.getElementById('evidencia-preview').style.display = 'none';
+            document.getElementById('otro-detalle-container').style.display = 'none';
+            setTimeout(() => smoothScrollTo('articulos'), 1000);
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const email = form.querySelector('#contact-correo').value;
+            const feedback = document.getElementById('contact-feedback');
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                feedback.style.display = 'block';
+                feedback.textContent = 'Por favor, ingrese un correo electrónico válido.';
+                return;
+            }
+
+            feedback.style.display = 'block';
+            feedback.textContent = 'Consulta enviada con éxito. ¡Gracias!';
+            form.reset();
+        }
+
+        function updateReportesTable() {
+            const tbody = document.getElementById('reportes-tbody');
+            tbody.innerHTML = '';
+            const reportes = JSON.parse(localStorage.getItem('reportes')) || [];
+            reportes.forEach(reporte => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${reporte.fecha}</td>
+                    <td>${reporte.problema}</td>
+                    <td>${reporte.estado}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        window.addEventListener('load', () => {
+            const loginSection = document.getElementById('iniciar-sesion');
+            loginSection.style.animation = 'slideIn 0.8s ease-out forwards';
+
+            // Check if user is logged in
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                document.getElementById('reportar').classList.remove('hidden');
+                document.getElementById('historial').classList.remove('hidden');
+                updateReportesTable();
+                smoothScrollTo('reportar'); // Scroll to reportar if already logged in
+            }
+
+            // Handle "Otro" problem selection
+            const problemaSelect = document.getElementById('problema');
+            const otroContainer = document.getElementById('otro-detalle-container');
+            problemaSelect.addEventListener('change', () => {
+                otroContainer.style.display = problemaSelect.value === 'otro' ? 'block' : 'none';
+            });
+
+            // Handle image preview
+            const evidenciaInput = document.getElementById('evidencia');
+            const previewImg = document.getElementById('evidencia-preview');
+            evidenciaInput.addEventListener('change', () => {
+                if (evidenciaInput.files && evidenciaInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        previewImg.src = e.target.result;
+                        previewImg.style.display = 'block';
+                    };
+                    reader.readAsDataURL(evidenciaInput.files[0]);
+                } else {
+                    previewImg.style.display = 'none';
+                }
+            });
+
+            // Generate QR code
+            new QRCode(document.getElementById('qrcode'), {
+                text: 'https://example.com/reporte-sanitario',
+                width: 200,
+                height: 200,
+                colorDark: '#1A237E',
+                colorLight: '#E0F7FA'
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = ['intro-section', 'iniciar-sesion', 'reportar', 'educacion'];
+            let current = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element.getBoundingClientRect().top <= 100) {
+                    current = section;
+                }
+            });
+            document.querySelectorAll('nav ul li a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
